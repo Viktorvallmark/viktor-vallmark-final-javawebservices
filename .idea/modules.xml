@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/viktor-vallmark-final-javawebservices.iml" filepath="$PROJECT_DIR$/.idea/viktor-vallmark-final-javawebservices.iml" />
+      <module fileurl="file://$PROJECT_DIR$/viktor-vallmark-web-service/viktor-vallmark-web-service.iml" filepath="$PROJECT_DIR$/viktor-vallmark-web-service/viktor-vallmark-web-service.iml" />
+    </modules>
+  </component>
+</project>

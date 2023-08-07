@@ -13,9 +13,7 @@ import java.util.ArrayList;
 
 @RestController
 public class ApiController implements ErrorController {
-
-    private final ArrayList<numberBean> allNumBeans = new ArrayList<numberBean>();
-    private GuessNumber guessNumber = new GuessNumber();
+    private GuessNumber guessNumber;
 
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public String root() {
@@ -45,9 +43,13 @@ public class ApiController implements ErrorController {
     @GetMapping(value = "/guessnumber", produces = "text/html")
     public String numberGameLanding()
     {
+        guessNumber = new GuessNumber();
+
+
+
         return "<html><head><title>Guess the number!</title></head>" +
                 "<body><h3>Rules: Chose a number between 1-100 and the computer will tell you if it's correct " +
-                "or lower/over. When you guess the correct number, the computer will tell you how many tries" +
+                "or lower/over. When you guess the correct number, the computer will tell you how many tries " +
                 "it took to get the correct number!</h3>" +
                 "<h4>Please enter your name and your first guess down below</h4>"+
                 "<form action=\"http://localhost:8080/playgame\" method=\"POST\">" +
@@ -58,15 +60,14 @@ public class ApiController implements ErrorController {
 
     @PostMapping(value = "/playgame")
     public String playGuessGame(@RequestParam(required = false) String name, @RequestParam int guess){
-        guessNumber.getNumBean().setName(name);
+
         String kek = guessNumber.playGameGuess(guess);
 
 
-        return "<html><body><h1>Hello, " + guessNumber.getNumBean().getName()+
+        return "<html><body><h1>Hello, " + guessNumber.+
                 "</h1>"+
                 "<p>"+kek+"</p>" +
                 "<p><form action =\"http://localhost:8080/playgame\" method =\"POST\">"+
-                "Name: <input type=\"text\" name=\"name\" value=\""+name+"\">"+
                 "<div>Guess: <input type=\"number\" name=\"guess\" min=\"1\" max=\"100\"><div><div>" +
                 "<input type=\"submit\" name=\"ok\"></p><p><a href=\"http://localhost:8080/\" Main page>Return to main page.</body></html>";
     }
@@ -85,7 +86,7 @@ public class ApiController implements ErrorController {
             method = RequestMethod.GET,
             produces = MediaType.TEXT_PLAIN_VALUE)
     public void showCsvFile(HttpServletResponse response) throws IOException {
-        var csvFile = new ClassPathResource("sample.csv");
+        ClassPathResource csvFile = new ClassPathResource("sample.csv");
 
         response.setContentType(MediaType.TEXT_PLAIN_VALUE);
         StreamUtils.copy(csvFile.getInputStream(), response.getOutputStream());
@@ -98,8 +99,9 @@ public class ApiController implements ErrorController {
     public void showJsonFile(HttpServletResponse response) throws IOException
     {
         ReadCsv myReader = new ReadCsv();
-        myReader.csvToJson("sample.csv");
         ClassPathResource jsonFile = new ClassPathResource("output.json");
+        myReader.csvToJson("sample.csv");
+
 
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         StreamUtils.copy(jsonFile.getInputStream(), response.getOutputStream());

@@ -9,49 +9,45 @@ public class GuessNumber {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 100;
     private final int computerGuess;
+    private String name;
 
-
-    /**
-     * 
-     */
     public GuessNumber(String name)
     {
-        this.numBean = new numberBean(name);
+        this.name = name;
         this.computerGuess = ThreadLocalRandom.current().nextInt(MIN_NUMBER, MAX_NUMBER+1);
     }
 
-    public GuessNumber()
-    {
-        this.numBean = new numberBean();
+    public GuessNumber() {
+
         this.computerGuess = ThreadLocalRandom.current().nextInt(MIN_NUMBER, MAX_NUMBER+1);
     }
 
-    public numberBean getNumBean() {
-        return numBean;
-    }
     public int getComputerGuess()
     {
         return computerGuess;
     }
 
+    public String getName(){ return name;}
+    public void setName(String name){this.name = name;}
+
     public String playGameGuess(int playerGuess){
-        String result = "";
-        int numberOfGuesses = 0;
+        String result;
+        numBean = new numberBean(0, playerGuess);
         int compGuess = getComputerGuess();
         if (playerGuess == compGuess)
         {
-            numberOfGuesses +=1;
-            result = compGuess + "Your guess is correct. Congratulations! You guessed correct in: " + Integer.toString(numberOfGuesses);
+            numBean.increaseGuesses();
+            result =  "Your guess is correct. Congratulations! You guessed correct in: " + numBean.getNumberOfGuesses();
         }
         else if (playerGuess < compGuess)
         {
-            numberOfGuesses+=1;
-            result = compGuess + "Your guess is smaller than the number the computer chose. You have tried " + Integer.toString(numberOfGuesses) + " times.";
+            numBean.increaseGuesses();
+            result = "Your guess is smaller than the number the computer chose. You have tried " + numBean.getNumberOfGuesses() + " times.";
         }
         else
         {
-            numberOfGuesses+=1;
-            result = compGuess + "Your guess is larger than the number the computer chose. You have tried " + Integer.toString(numberOfGuesses)+ " times.";
+            numBean.increaseGuesses();
+            result = "Your guess is larger than the number the computer chose. You have tried " + numBean.getNumberOfGuesses() + " times.";
         }
         return result;
     }

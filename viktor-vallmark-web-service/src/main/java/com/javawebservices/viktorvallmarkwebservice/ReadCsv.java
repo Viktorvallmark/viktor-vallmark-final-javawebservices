@@ -54,10 +54,9 @@ public class ReadCsv {
         String json = CDL.toJSONArray(csvAsString).toString();
 
         try {
-            Files.writeString(Path.of("src/main/resources/output.json"), json);
+            Files.writeString(Path.of("output.json"), json);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }
