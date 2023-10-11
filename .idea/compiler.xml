@@ -9,9 +9,6 @@
         <module name="viktor-vallmark-web-service" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="viktor-vallmark-web-service" target="17" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

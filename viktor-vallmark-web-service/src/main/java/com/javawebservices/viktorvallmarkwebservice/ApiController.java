@@ -64,7 +64,7 @@ public class ApiController implements ErrorController {
         String kek = guessNumber.playGameGuess(guess);
 
 
-        return "<html><body><h1>Hello, " + guessNumber.+
+        return "<html><body><h1>Hello, " + guessNumber.getName()+
                 "</h1>"+
                 "<p>"+kek+"</p>" +
                 "<p><form action =\"http://localhost:8080/playgame\" method =\"POST\">"+
